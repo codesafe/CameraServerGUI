@@ -215,10 +215,14 @@ public class CameraObj : MonoBehaviour
         }
     }
 
-    public void SendPacket(char packet)
+    public void SendPacket(char packet, char param0, char param1, char param2)
     {
         byte[] data = new byte[Predef.UDP_BUFFER];
         data[0] = Convert.ToByte(packet);
+        data[1] = Convert.ToByte(param0);
+        data[2] = Convert.ToByte(param1);
+        data[3] = Convert.ToByte(param2);
+
         udpSocket.SendTo(data, Predef.UDP_BUFFER, SocketFlags.None, ipep);
 
         if (packet == Predef.PACKET_HALFPRESS)

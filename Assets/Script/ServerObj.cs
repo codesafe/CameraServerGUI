@@ -55,7 +55,7 @@ public class ServerObj : MonoBehaviour
             option.text = isoString[i];
             iso.options.Add(option);
         }
-        iso.value = 1;
+        iso.value = Predef.defaultIso;
         iso.onValueChanged.AddListener(OnISOValueChanged);
 
         shutterspeed.options.Clear();
@@ -65,7 +65,7 @@ public class ServerObj : MonoBehaviour
             option.text = shutterspeedString[i];
             shutterspeed.options.Add(option);
         }
-        shutterspeed.value = 36;
+        shutterspeed.value = Predef.defaultShutterSpeed;
         shutterspeed.onValueChanged.AddListener(OnShuutterSpeedValueChanged);
 
         aperture.options.Clear();
@@ -75,7 +75,7 @@ public class ServerObj : MonoBehaviour
             option.text = apertureString[i];
             aperture.options.Add(option);
         }
-        aperture.value = 6;
+        aperture.value = Predef.defaultAperture;
         aperture.onValueChanged.AddListener(OnApertureValueChanged);
 
     }
@@ -87,29 +87,33 @@ public class ServerObj : MonoBehaviour
 
     public void onClickAutoFocus()
     {
-        CameraManager.getInstance().SendPacket(Predef.PACKET_HALFPRESS);
-        Debug.Log("Auto Focus!");
+        CameraManager.getInstance().SendPacket(Predef.PACKET_HALFPRESS, 
+            (char)Predef.Iso, (char)Predef.ShutterSpeed, (char)Predef.Aperture);
+        Debug.Log( string.Format("Auto Focus : {0} : {1} : {2}", Predef.Iso, Predef.ShutterSpeed, Predef.Aperture));
     }
 
     public void onClickCapture()
     {
-        CameraManager.getInstance().SendPacket(Predef.PACKET_SHOT);
-        Debug.Log("Shot!");
+        CameraManager.getInstance().SendPacket(Predef.PACKET_SHOT, (char)0, (char)0, (char)0);
+        Debug.Log("Capture !");
     }
 
     public void OnISOValueChanged(int value)
     {
         Debug.Log(value);
+        Predef.Iso = value;
     }
 
     public void OnShuutterSpeedValueChanged(int value)
     {
         Debug.Log(value);
+        Predef.ShutterSpeed = value;
     }
 
     public void OnApertureValueChanged(int value)
     {
         Debug.Log(value);
+        Predef.Aperture = value;
     }
 
     public void OnHover(CameraObj camobj)

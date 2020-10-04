@@ -7,9 +7,13 @@ using System.Threading.Tasks;
 
 public class Predef
 {
-    static public string defaultIso = "100";
-    static public string defaultAperture = "100";
-    static public string defaultShutterSpeed = "100";
+    static public int defaultIso = 3;               // 100
+    static public int defaultAperture = 5;          // "9";
+    static public int defaultShutterSpeed = 36;     //"1/100";
+
+    static public int Iso = defaultIso;
+    static public int Aperture = defaultAperture;
+    static public int ShutterSpeed = defaultShutterSpeed;
 
     static public int tcpport = 8888;
     static public int udpport = 9999;
