@@ -70,11 +70,11 @@ public class CameraManager : MonoBehaviour
         }
     }
 
-    public void SendPacket(char packet, char param0, char param1, char param2)
+    public void SendPacket(char packet)
     {
         for(int i=0; i<cameraobjList.Count; i++)
         {
-            cameraobjList[i].SendPacket(packet, param0, param1, param2);
+            cameraobjList[i].SendPacket(packet);
         }
     }
 
